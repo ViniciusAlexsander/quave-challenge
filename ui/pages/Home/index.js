@@ -6,6 +6,7 @@ import { People } from '../../../people/people';
 import { Collections } from '../../../shared/collections';
 import { PeopleList } from './components/peopleList';
 import { Summary } from './components/summary';
+import { AddNewPerson } from './components/addNewPerson';
 
 export const Home = () => {
   const [communitySelected, setCommunitySelected] = useState('');
@@ -41,24 +42,29 @@ export const Home = () => {
   return (
     <div className="flex w-full justify-center">
       <div className="w-full p-4 md:w-3/4 lg:w-3/5">
-        <select
-          value={communitySelected}
-          onChange={handleSelectCommunity}
-          className="block w-full rounded-lg border border-primary bg-surfaces p-2.5 text-sm text-copy-primary focus:border-secondary focus:ring-copy-primary"
-        >
-          <option value="" className="font-bold">
-            Select an event
-          </option>
-          {communitiesData.communities.map((community) => (
-            <option
-              key={community._id}
-              value={community._id}
-              className="font-bold"
-            >
-              {community.name}
+        <div className="mt-4">
+          <AddNewPerson />
+        </div>
+        <div className="mt-4">
+          <select
+            value={communitySelected}
+            onChange={handleSelectCommunity}
+            className="block w-full rounded-lg border border-primary bg-surfaces p-2.5 text-sm text-copy-primary focus:border-secondary focus:ring-copy-primary"
+          >
+            <option value="" className="font-bold">
+              Select an event
             </option>
-          ))}
-        </select>
+            {communitiesData.communities.map((community) => (
+              <option
+                key={community._id}
+                value={community._id}
+                className="font-bold"
+              >
+                {community.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="mt-4">
           <Summary communitySelected={communitySelected} />
         </div>

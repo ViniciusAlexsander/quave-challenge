@@ -26,5 +26,8 @@ Meteor.startup(async () => {
         { $set: { checkOut: new Date() } }
       );
     },
+    async addNewPerson(person) {
+      await People.insertAsync(person);
+    },
   });
 });
