@@ -25,23 +25,17 @@ export const Summary = ({ communitySelected }) => {
 
     const groupedByCompany = peopleInEvent.reduce((acc, person) => {
       const { companyName } = person;
-      if (companyName) {
-        if (!acc[companyName]) {
-          acc[companyName] = [];
-        }
-        acc[companyName].push(person);
-      }
+      if (!companyName) return acc;
+
+      acc[companyName] = acc[companyName] || [];
+      acc[companyName].push(person);
 
       return acc;
     }, {});
 
-    const peopleByCompany = [];
-
-    Object.keys(groupedByCompany).forEach((companyName) => {
-      peopleByCompany.push(
-        `${companyName} (${groupedByCompany[companyName].length})`
-      );
-    });
+    const peopleByCompany = Object.entries(groupedByCompany).map(
+      ([companyName, people]) => `${companyName} (${people.length})`
+    );
 
     return {
       peopleInEvent: peopleInEvent.length,
